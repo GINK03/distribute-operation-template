@@ -15,8 +15,24 @@ sshfsはssh経由で、ファイルシステムをマウントする仕組みで
 ...
 ```
 
-## GCP Preemtible Instance(AWSのSpot Instance)を用いた効率的なスケールアウト
-計算ノードは、全くの非同期で運用できるので、途中で唐突にシャットダウンされても問題がないので、　安いけどクラウド運営側の都合でシャットダウンされてしまう可能性があるけど、1/10 ~ 1/5の値段程度に収まる　GCP Preemtiple InstanceやAWS　Spot Instanceを用いることができます。  
+## GCP Preemptible Instance(AWSのSpot Instance)を用いた効率的なスケールアウト
+計算ノードは、全くの非同期で運用できるので、途中で唐突にシャットダウンされても問題がないので、　安いけどクラウド運営側の都合でシャットダウンされてしまう可能性があるけど、1/10 ~ 1/5の値段程度に収まる　GCP Preemptible InstanceやAWS　Spot　Instanceを用いることができます。  
+
+Preemptibleインスタンスはgcloudコマンドでインストールできますが、このようにPythonなどのスクリプトでラップしておくとまとめて操作できて便利です。　　
+
+**Preemptible インスタンスをまとめて作成**  
+```python
+import os
+
+type = 'n1-highcpu-64'
+image = 'nardtree-jupyter-1'
+
+for i in range(0, 3):
+  name = f'adhoc-preemptible-{i:03d}'
+  ctx = f'gcloud compute instances create {name} --machine-type {type} --image {image} --preemptible'
+  os.system(ctx)
+```
+このスクリプトでは、自分で作成した必要なライブラリがインストールされた状態のイメージ(nardtree-jupyter-1)からハイパフォーマンスのインスタンスを3大作成しています。
 
 
 
