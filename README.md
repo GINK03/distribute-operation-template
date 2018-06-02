@@ -103,4 +103,7 @@ for name in names:
 図2の例では、CPUはだいぶ空いており、コードとこの観測結果から、DISKのアクセスが間に合ってないと分かります。オンメモリで読み込むことや、よりアクセスの速いDISKを利用することが検討されます。  
 
 ## Forkコスト最小化とキャッシュ化
+ マルチプロセッシングによるリソースの最大利用は便利な方法ですが、[spawn, fork, forkserverの方法が提供](https://docs.python.jp/3/library/multiprocessing.html)されています。  
+ 使っていて最もコスト安なのはforkなのですが、これでうまく動作しないことが稀にあって、spawnやforkserverに切り替えて用いることがあります。spawnが一番重いです。　　　
  
+``` 
