@@ -95,5 +95,11 @@ for name in names:
   
 3. アルゴリズムの最適化
   何らかのメジャーな方法でうまくやれる方法がないか探す
+<div align="center">
+  <img width="700px" src="https://user-images.githubusercontent.com/4949982/40873723-fda0e814-66a0-11e8-84d2-7da34da281e9.png">
+</div>
+<div align="center"> 図2.　 </div>
+
+図2の例では、CPUはだいぶ空いており、コードとこの観測結果から、DISKのアクセスが間に合ってないと分かります。オンメモリで読み込むことや、よりアクセスの速いDISKを利用することが検討されます。  
 
 ## Forkコスト最小化とキャッシュ化
