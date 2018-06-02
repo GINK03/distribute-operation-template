@@ -157,7 +157,7 @@ with PPE(max_workers=16) as exe:
 
 print(f'elapsed time {time.time() - start}')
 ```
-```python
+```console
 $ python3 batch2.py 
 elapsed time 0.035398244857788086
 ```
@@ -190,4 +190,35 @@ print(f'elapsed time {time.time() - start}')
 $ python3 batch2.py 
 elapsed time 3.9257876873016357
 ```
+これをメモ化して、ある程度の最適化を入れると、倍以上の速度になります  
+```python
+from concurrent.futures import ProcessPoolExecutor as PPE
+import time
+import random
+import itertools
+data = [random.randint(0, 1_000) for i in range(10_000_000)]
+tmp = {}
+for index, rint in enumerate(data):
+  key = index%16
+  if tmp.get(key) is None:
+    tmp[key] = []
+  tmp[key].append( rint )
 
+args = [ rints for key, rints in tmp.items() ] 
+def batch(rints):
+  mem = {}
+  result = []
+  for rint in rints:
+    if mem.get(rint) is None:
+      mem[rint] = itertools.reduce(lambda y,x:y*x, [rint for i in range(10)] )
+    result.append( mem[rint] ) 
+  return result
+start = time.time()
+with PPE(max_workers=16) as exe:
+  exe.map(batch, args)
+print(f'elapsed time {time.time() - start}')
+```
+```console
+$ python3 batch3.py
+elapsed time 1.4659481048583984
+```
