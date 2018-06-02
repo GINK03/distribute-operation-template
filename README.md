@@ -11,7 +11,7 @@ sshfsはssh経由で、ファイルシステムをマウントする仕組みで
 
 この構造のメリットは、横展開するマシンの台数に応じて、早くできることと、あまりコードをいじらずに、分散処理できます。  
 <div align="center">
-  <img src="500px" src="https://user-images.githubusercontent.com/4949982/40872867-ea2d8a0e-6690-11e8-942b-28dd83de2617.png">
+  <img width="650px" src="https://user-images.githubusercontent.com/4949982/40872867-ea2d8a0e-6690-11e8-942b-28dd83de2617.png">
 </div>
 <div align="center"> 図1. </div>
 
