@@ -10,10 +10,34 @@ sshfsはssh経由で、ファイルシステムをマウントする仕組みで
 また、ホストから簡単に進捗状況をチェックすこともできます。  
 
 この構造のメリットは、横展開するマシンの台数に応じて、早くできることと、あまりコードをいじらずに、分散処理できます。  
+<div align="center">
+  <img src="500px" src="https://user-images.githubusercontent.com/4949982/40872867-ea2d8a0e-6690-11e8-942b-28dd83de2617.png">
+</div>
+<div align="center"> 図1. </div>
 
+処理粒度を決定して、処理したデータはなにかキーとなる値か、なければ、hash値でファイルが処理済みかどうかを判断することで、効率的に分散処理することtができます。　　　
+
+sshfs上の処理粒度に対してすでに、処理済みであれば、処理をスキップします。  
+
+(sshfs上で行ったものは二度目はファイルが共有され、二度目は、処理されないので、効率的に処理できます)  
 ```python
-...
+from pathlib import Path
+import random
+from concurrent.futures  import ProcessPoolExecutor as PPE
+def deal(path):
+  target = Path( f'target_dir/' + str(path).split('/').pop() )
+  if target.exists():
+    # do nothing
+    return  
+  # do some heavy process
+  target.open('w').write( 'some_heavy_output' )
+
+paths = [path for path in Path('source_dir/').glob('*')]
+random.shuffle(paths) # shuffle
+with PPE(max_workers=64) as exe:
+  exe.map(deal, paths)
 ```
+
 
 ## GCP Preemptible Instance(AWSのSpot Instance)を用いた効率的なスケールアウト
 計算ノードは、全くの非同期で運用できるので、途中で唐突にシャットダウンされても問題がないので、　安いけどクラウド運営側の都合でシャットダウンされてしまう可能性があるけど、1/10 ~ 1/5の値段程度に収まる　GCP Preemptible InstanceやAWS　Spot　Instanceを用いることができます。  
