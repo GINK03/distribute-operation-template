@@ -156,9 +156,38 @@ with PPE(max_workers=16) as exe:
   exe.map(batch, args)
 
 print(f'elapsed time {time.time() - start}')
+```
 ```python
 $ python3 batch2.py 
 elapsed time 0.035398244857788086
 ```
 
+**メモ化、キャッシュを利用する**  
+同じ内容が出現し、結果を保存できる場合、計算の多くを共通で占める箇所を、特定のキーで保存しておいて、再利用することで、高速に処理することができます。  
+
+特定の入力の値を10乗して、返すというあまりない問題ですが、わかりやすいので、これで示すと、チャンクして処理するものが、このコードになり、４秒程度かかります。  
+```python
+import time
+import random
+import functools
+data = [random.randint(0, 1_000) for i in range(10_000_000)]
+tmp = {}
+for index, rint in enumerate(data):
+  key = index%16
+  if tmp.get(key) is None:
+    tmp[key] = []
+  tmp[key].append( rint )
+args = [ rints for key, rints in tmp.items() ] 
+def batch(rints):
+  return [functools.reduce(lambda y,x:y*x, [rint for i in range(10)]) for rint in rints ]
+
+start = time.time()
+with PPE(max_workers=16) as exe:
+  exe.map(batch, args)
+print(f'elapsed time {time.time() - start}')
+```
+```console
+$ python3 batch2.py 
+elapsed time 3.9257876873016357
+```
 
