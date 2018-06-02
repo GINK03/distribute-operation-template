@@ -1,7 +1,7 @@
 # distribute-operation-template
 運用でカバーを前提とした、分散処理で重い操作を行うときの、オペレーション
 
-## Kaggle Google Landmark　Recognission + Retrievalで必要となったテク
+## Kaggle Google Landmark　Recognition + Retrievalで必要となったテク
 
 (概要を書く)
 
