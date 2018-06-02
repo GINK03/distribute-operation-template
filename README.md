@@ -34,6 +34,7 @@ for i in range(0, 3):
 ```
 このスクリプトでは、自分で作成した必要なライブラリがインストールされた状態のイメージ(nardtree-jupyter-1)からハイパフォーマンスのインスタンスを3大作成しています。
 
+## GCPをMacBookなどのクライアントマシンから命令を送る
 **Premptible インスタンスに必要なソフトをインストールして、sshfs経由でマウント**  
 クライアントマシン（手元のMacBookなど）から、コマンドを実行させることができます。　　　
 
@@ -55,9 +56,6 @@ for name in names:
     base = f'gcloud compute ssh {GCP_NAME}@{name} --command "{command}"'
     os.system(base)
 ```
-
-
-## GCPをMacBookなどのクライアントマシンから命令を送る
 
 ## Overheadを見極める
 
