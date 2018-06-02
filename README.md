@@ -84,17 +84,11 @@ for name in names:
 ## Overheadを見極める
 高速化の余地があるプログラムの最適化はどうされていますでしょうか。　　
 私のつかっているヒューリスティックは、以下のプロセスで全体のプロセスを最適化します。　　　
-1. コードの大まかな把握
-2. htopを利用して、すべてのCPUのスレッドが100%使用されているか把握  
 
-  \- **100%でない場合** -> ネットワーク or ディスクにオーバヘッドが存在するので最適化する　　
+<div align="center">
+  <img width="600px" src="https://user-images.githubusercontent.com/4949982/40877659-8200f540-66bf-11e8-99af-bf5206bcf0fd.png">
+</div>
 
-  \- **赤が支配的な場合** -> システムのオーバヘッドが大きくなっているので、結合方式がオーバーヘッドなので見直す 
-
-  \- **緑が支配的な場合** -> CPU使用法はOK　　
-
-3. アルゴリズムの最適化
-  何らかのメジャーな方法でうまくやれる方法がないか探す
 <div align="center">
   <img width="700px" src="https://user-images.githubusercontent.com/4949982/40873723-fda0e814-66a0-11e8-84d2-7da34da281e9.png">
 </div>
