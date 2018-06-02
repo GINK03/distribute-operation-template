@@ -3,9 +3,9 @@
 
 ## Kaggle Google Landmark　Recognition + Retrievalで必要となったテク
 
-Kaggleでチームを組んで皆さんのノウハウと勢いを学ぶべく、KaggleのGoogle Landmark RecognitionとRetrievalのコンペティションにそれぞれチームで、参加しました。 
+Kaggleでチームを組んで皆さんのノウハウと勢いを学ぶべく、Kaggleの[Google Landmark Recognition](https://www.kaggle.com/c/landmark-recognition-challenge)と[Retrieval](https://www.kaggle.com/c/landmark-retrieval-challenge)のコンペティションにそれぞれチームで、参加しました。 
 
-メンツは、キャッシュさん、yu4uさん、私という激強のお二人に私が今回頑張ってキャッチアップしていった側面があり、画像のことはディープ以降の知識レベルであったので、大変勉強になったコンペです。　　
+メンツは、キャッシュさん、yu4uさん、私という激強のお二人に私が頑張ってキャッチアップしていった側面があり、画像のことはディープ以降の知識レベルであったので、大変勉強になったコンペです。　　
 
 ここで、ディープの特徴量 + 局所特徴量の両方を取り出し、マッチングを計算するという問題で、一部強烈に重い操作を行いました。  
 
