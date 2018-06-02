@@ -129,5 +129,36 @@ print(f'elapsed time {time.time() - start}')
 $ python3 batch.py 
 elapsed time 32.37867593765259
 ```
+では、単純にある程度、データをチャンクしてマルチプロセスにします。  
+
+すると、0.04秒程度になり、ほぼ一瞬で処理が完了します  
+
+これはおおよそ、もとの速度の800倍です
+```python
+from concurrent.futures import ProcessPoolExecutor as PPE
+import time
+import random
+data = [random.randint(0, 1_000) for i in range(100_000)]
+
+tmp = {}
+for index, rint in enumerate(data):
+  key = index%16
+  if tmp.get(key) is None:
+    tmp[key] = []
+  tmp[key].append( rint )
+
+args = [ rints for key, rints in tmp.items() ] 
+def batch(rints):
+  return [rint*rint for rint in rints ]
+
+start = time.time()
+with PPE(max_workers=16) as exe:
+  exe.map(batch, args)
+
+print(f'elapsed time {time.time() - start}')
+```python
+$ python3 batch2.py 
+elapsed time 0.035398244857788086
+```
 
 
