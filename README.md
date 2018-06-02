@@ -108,4 +108,26 @@ for name in names:
  
 　forkでは親プロセスのメモリ内容をコピーしてしまうので、大きなデータを並列処理しようとすると、丸ごとコピーコストがかかり、小さい処理を行うためだけにメモリがいくら高速と言えど、細かく行いすぎるのは、かなりのコストになるので、バッチ的に処理する内容をある程度固めて行うべきです。　　　
  
- 
+ 例えば、次のランダムな値を100万回、二乗するのをマルチプロセスで行うと、おおよそ、30秒かかります。  
+```python
+from concurrent.futures import ProcessPoolExecutor as PPE
+import time
+import random
+args = [random.randint(0, 1_000) for i in range(100_000)]
+
+def normal(i):
+  ans = i*i
+  return ans
+
+start = time.time()
+with PPE(max_workers=16) as exe:
+  exe.map(normal, args)
+
+print(f'elapsed time {time.time() - start}')
+```
+```console
+$ python3 batch.py 
+elapsed time 32.37867593765259
+```
+
+
