@@ -58,9 +58,11 @@ with PPE(max_workers=64) as exe:
 
 
 ## 2. GCP Preemptible Instance(AWSのSpot Instance)を用いた効率的なスケールアウト
-計算ノードは、全くの非同期で運用できるので、途中で唐突にシャットダウンされても問題がないので、　安いけどクラウド運営側の都合でシャットダウンされてしまう可能性があるけど、1/10 ~ 1/5の値段程度に収まる　GCP Preemptible InstanceやAWS　Spot　Instanceを用いることができます。  
+計算ノードは、非同期で運用できるので、途中で唐突にシャットダウンされても問題がないです。そのため、安いけどクラウド運営側の都合でシャットダウンされてしまう可能性があるが、1/10~1/5の値段程度に収まるGCP PreemptibleインスタンスやAWS　Spotインスタンスを用いることができます。  
 
-Preemptibleインスタンスはgcloudコマンドでインストールできますが、このようにPythonなどのスクリプトでラップしておくとまとめて操作できて便利です。　　
+Preemptibleインスタンスはgcloudコマンドで一括で作成できますが、このようにPythonなどのスクリプトでラップしておくとまとめて操作できて便利です。　　
+
+sshfs, nfsなどでデータを参照したり、必要なgit projectをcloneして実行したりすることができます。  
 
 **Preemptible インスタンスをまとめて作成**  
 ```python
