@@ -1,5 +1,7 @@
 # distribute-operation-template
-運用でカバーを前提とした、分散処理で重い操作を行うときの、オペレーション
+
+GCPやAWSで膨大な計算を行う際に、オーバーヘッドを見極めて、大量のインスタンスを利用し、半自動化して、より効率的に運用するテクニックです。  
+
 
 ## Kaggle Google Landmark　Recognition + Retrievalで必要となったテク
 
