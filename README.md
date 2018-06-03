@@ -121,8 +121,11 @@ for name in names:
  マルチプロセッシングによるリソースの最大利用は便利な方法ですが、[spawn, fork, forkserverの方法が提供](https://docs.python.jp/3/library/multiprocessing.html)されています。  
  使っていて最もコスト安なのはforkなのですが、これでうまく動作しないことが稀にあって、spawnやforkserverに切り替えて用いることがあります。spawnが一番重いです。　　　
  
-　forkでは親プロセスのメモリ内容をコピーしてしまうので、大きなデータを並列処理しようとすると、丸ごとコピーコストがかかり、小さい処理を行うためだけにメモリがいくら高速と言えど、細かく行いすぎるのは、かなりのコストになるので、バッチ的に処理する内容をある程度固めて行うべきです。　　　
- 
+　forkでは親プロセスのメモリ内容をコピーしてしまうので、大きなデータを並列処理しようとすると、丸ごとコピーコストがかかり、小さい処理を行うためだけにメモリがいくら高速と言えど、細かく行いすぎるのは、かなりのコストになるので、バッチ的に処理する内容をある程度固めて行うべきです。　　　cent
+<div align="center">
+  <img width="700px" src="https://user-images.githubusercontent.com/4949982/40874107-0e2e6fe4-66a6-11e8-9e3b-6861e38ff52c.png">
+</div>
+
  例えば、次のランダムな値を100万回、二乗するのをマルチプロセスで行うと、おおよそ、30秒かかります。  
 ```python
 from concurrent.futures import ProcessPoolExecutor as PPE
