@@ -74,10 +74,10 @@ for i in range(0, 3):
   ctx = f'gcloud compute instances create {name} --machine-type {type} --image {image} --preemptible'
   os.system(ctx)
 ```
-このスクリプトでは、自分で作成した必要なライブラリがインストールされた状態のイメージ(nardtree-jupyter-1)からハイパフォーマンスのインスタンスを3大作成しています。
+このスクリプトでは、自分で作成した必要なライブラリがインストールされた状態のイメージ(nardtree-jupyter-1)からハイパフォーマンスのインスタンスを３台作成します。
 
 ## 3. MacBookからGCPのインスタンスに命令を送る
-gcloud　toolをインストールし設定することで、GCPのインスタンスに対して命令(コマンド)を送ることができます  
+[gcloud　tool](https://cloud.google.com/pubsub/docs/quickstart-cli)をインストールし設定することで、GCPのインスタンスに対して命令(コマンド)を送ることができます  
 
 **Premptible インスタンスに必要なソフトをインストールして、sshfs経由でマウント**  
 クライアントマシン（手元のMacBookなど）から、コマンドを実行させることができます。　　　
@@ -90,6 +90,7 @@ import os
 GCP_NAME = os.environ['GCP_NAME']
 GCP_KEY_NAME = os.environ['GCP_KEY_NAME']
 names = [f'adhoc-preemptible-{i:03d}' for i in range(0, 3)]
+# commandsのところに任意の処理を書くことができます　
 commands = [  'sudo apt update', \
               'sudo apt-get install sshfs', \
               'mkdir machine', \
