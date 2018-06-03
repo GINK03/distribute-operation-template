@@ -79,7 +79,7 @@ for i in range(0, 3):
 このスクリプトでは、自分で作成した必要なライブラリがインストールされた状態のイメージ(nardtree-jupyter-1)からハイパフォーマンスのインスタンスを３台作成します。
 
 ## 3. MacBookからGCPのインスタンスに命令を送る
-[gcloud　tool](https://cloud.google.com/pubsub/docs/quickstart-cli)をインストールし設定することで、GCPのインスタンスに対して命令(コマンド)を送ることができます  
+[google cloud　tool](https://cloud.google.com/sdk/docs/)をインストールし設定することで、GCPのインスタンスに対して命令(コマンド)を送ることができます  
 
 **Premptible インスタンスに必要なソフトをインストールして、sshfs経由でマウント**  
 クライアントマシン（手元のMacBookなど）から、コマンドを実行させることができます。　　　
